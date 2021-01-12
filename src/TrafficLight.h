@@ -24,30 +24,41 @@ private:
     
 };
 
-// FP.1 : Define a class „TrafficLight“ which is a child class of TrafficObject. 
+// Done.1 : Define a class „TrafficLight“ which is a child class of TrafficObject. 
 // The class shall have the public methods „void waitForGreen()“ and „void simulate()“ 
 // as well as „TrafficLightPhase getCurrentPhase()“, where TrafficLightPhase is an enum that 
 // can be either „red“ or „green“. Also, add the private method „void cycleThroughPhases()“. 
-// Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value. 
+// Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value.
 
-class TrafficLight
-{
+enum TrafficLightPhase {
+  red,
+  green
+};
+
+class TrafficLight : public TrafficObject {
+  
 public:
-    // constructor / desctructor
+  // constructor / desctructor
+  TrafficLight();
 
-    // getters / setters
+  // getters / setters
+  TrafficLightPhase getCurrentPhase();
 
-    // typical behaviour methods
+  // typical behaviour methods
+  void waitForGreen();
+  void simulate();
 
 private:
-    // typical behaviour methods
+  // typical behaviour methods
+  void cycleThroughPhases();
 
-    // FP.4b : create a private member of type MessageQueue for messages of type TrafficLightPhase 
-    // and use it within the infinite loop to push each new TrafficLightPhase into it by calling 
-    // send in conjunction with move semantics.
-
-    std::condition_variable _condition;
-    std::mutex _mutex;
+  // FP.4b : create a private member of type MessageQueue for messages of type
+  // TrafficLightPhase and use it within the infinite loop to push each new
+  // TrafficLightPhase into it by calling send in conjunction with move
+  // semantics.
+  TrafficLightPhase _currentPhase;
+  std::condition_variable _condition;
+  std::mutex _mutex;
 };
 
 #endif
