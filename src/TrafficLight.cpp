@@ -37,7 +37,6 @@ void TrafficLight::waitForGreen() {
     TrafficLightPhase message = _queue.receive();
     if (message == TrafficLightPhase::kGreen)
       return;
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
   }
 }
 
