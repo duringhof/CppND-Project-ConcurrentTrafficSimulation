@@ -38,26 +38,31 @@ template <typename T> void MessageQueue<T>::send(T &&msg) {
 
 /* Implementation of class "TrafficLight" */
 
-/*
-TrafficLight::TrafficLight()
-{
-    _currentPhase = TrafficLightPhase::red;
+TrafficLight::TrafficLight() {
+
+  _currentPhase = TrafficLightPhase::kRed;
 }
 
-void TrafficLight::waitForGreen()
-{
-    // FP.5b : add the implementation of the method waitForGreen, in which an
-infinite while-loop
-    // runs and repeatedly calls the receive function on the message queue.
-    // Once it receives TrafficLightPhase::green, the method returns.
+void TrafficLight::waitForGreen() {
+
+  // Done.5b : add the implementation of the method waitForGreen, in which an
+  // infinite while-loop runs and repeatedly calls the receive function on the
+  // message queue. Once it receives TrafficLightPhase::green, the method
+  // returns.
+
+  while (true) {
+
+    TrafficLightPhase message = _queue.receive();
+    if (message == TrafficLightPhase::kGreen)
+      return;
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  }
 }
 
-TrafficLightPhase TrafficLight::getCurrentPhase()
-{
-    return _currentPhase;
-}
+TrafficLightPhase TrafficLight::getCurrentPhase() {
 
-*/
+  return _currentPhase;
+}
 
 void TrafficLight::simulate() {
 
