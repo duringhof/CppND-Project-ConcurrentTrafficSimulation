@@ -31,8 +31,8 @@ private:
 // Furthermore, there shall be the private member _currentPhase which can take „red“ or „green“ as its value.
 
 enum TrafficLightPhase {
-  red,
-  green
+  kRed,
+  kGreen
 };
 
 class TrafficLight : public TrafficObject {
