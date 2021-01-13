@@ -94,7 +94,7 @@ void TrafficLight::cycleThroughPhases() {
         _currentPhase = TrafficLightPhase::kGreen;
 
       // Send update method to the message queue using move semantics
-      //_messageQueue.send(std::move(_currentPhase));
+      _queue.send(std::move(_currentPhase));
 
       // Reset stopwatch and renew randomized cycle time
       t_0 = std::chrono::steady_clock::now();
