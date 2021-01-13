@@ -4,7 +4,6 @@
 
 /* Implementation of class "MessageQueue" */
 
-/* 
 template <typename T>
 T MessageQueue<T>::receive()
 {
@@ -13,13 +12,19 @@ T MessageQueue<T>::receive()
     // The received object should then be returned by the receive function. 
 }
 
-template <typename T>
-void MessageQueue<T>::send(T &&msg)
-{
-    // FP.4a : The method send should use the mechanisms std::lock_guard<std::mutex> 
-    // as well as _condition.notify_one() to add a new message to the queue and afterwards send a notification.
+template <typename T> void MessageQueue<T>::send(T &&msg) {
+
+  // Done.4a : The method send should use the mechanisms
+  // std::lock_guard<std::mutex> as well as _condition.notify_one() to add a new
+  // message to the queue and afterwards send a notification.
+
+  // perform vector modification under the lock
+  std::lock_guard<std::mutex> uLock(_mutex);
+
+  // add vector to queue & notify client after pushing new Vehicle into vector
+  _queue.push_back(std::move(msg));
+  _cond.notify_one();
 }
-*/
 
 /* Implementation of class "TrafficLight" */
 
